@@ -3,3 +3,10 @@ export interface AuthenticationData {
   role: string;
 }
 
+export interface UserInputDTO {
+  email: string;
+  password: string;
+  name: string;
+  role: string;
+}
+
