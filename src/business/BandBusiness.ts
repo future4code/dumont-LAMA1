@@ -5,7 +5,6 @@ import { Band, BandInputDTO } from "./entities/Band";
 import { AuthenticationData } from "./entities/User";
 import { CustomError } from "./error/CustomError";
 
-
 export class BandBusiness {
 
     constructor (

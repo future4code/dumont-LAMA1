@@ -6,6 +6,15 @@ export class BandDataBase extends BaseDataBase {
 
     private static TABLE_NAME = "lama_bands"
 
+    private static toBandModel (band: any) {
+        return new Band(
+            band.id,
+            band.name,
+            band.music_genre,
+            band.responsible
+        )
+    }
+
     public async createBand(
         band: Band
     ): Promise<void> {
@@ -17,9 +26,29 @@ export class BandDataBase extends BaseDataBase {
                     music_genre: band.musicGenre,
                     responsible: band.responsible
                 })
-                .into(BandDataBase.TABLE_NAME);
+                .into(BandDataBase.TABLE_NAME)
         } catch (error) {
-            throw new CustomError(500, "An unexpected error ocurred");
+            throw new CustomError(500, "An unexpected error ocurred")
+        }
+    }
+
+    public async selectAllBands() 
+    : Promise<Band[]> {
+        try {
+            const result = await BaseDataBase.connection
+                .select("*")
+                .from(BandDataBase.TABLE_NAME)
+                
+            const bands: Band[] = []
+            for (let band of result[0]) {
+                bands.push(
+                    BandDataBase.toBandModel(band)
+                )
+            }
+
+            return bands
+        } catch (error) {
+            throw new CustomError(500, "An unexpected error ocurred")
         }
     }
 }
