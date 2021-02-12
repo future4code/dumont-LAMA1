@@ -1,10 +1,11 @@
+import { User } from "../business/entities/User";
 import { CustomError } from "../business/error/CustomError";
 import BaseDataBase from "./BaseDataBase";
 
 export class UserDatabase extends BaseDataBase {
 
     private static TABLE_NAME = "lama_users";
-
+    
 
     public async createUser(
         id: string,

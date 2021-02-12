@@ -1,12 +1,13 @@
 import cors from "cors";
 import express from "express";
 import { AddressInfo } from "net";
-//import { userRouter } from "./controller/routes/userRouter";
+import { userRouter } from "./controller/router/userRouter";
 
 const app = express()
 app.use(express.json())
 app.use(cors())
-//app.use("/user", userRouter);
+
+app.use("/user", userRouter);
 
 
 const server = app.listen(3003, () => {
