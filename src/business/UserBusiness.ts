@@ -19,8 +19,8 @@ export class UserBusiness {
 
         try {
 
-            if (!input.email || !input.name || !input.password || !input.role) {
-                throw new CustomError(405, "Please, complete email, name, password and role!")
+            if (!input.email || !input.name || !input.password) {
+                throw new CustomError(405, "Please, complete email, name and password!")
             }
 
             if (!input.email.includes("@")) {

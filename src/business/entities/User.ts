@@ -23,7 +23,7 @@ export class User {
      public readonly name: string,
      public readonly email: string,
      public readonly password: string,
-     public readonly role: UserRole
+     public readonly role: UserRole = UserRole.NORMAL
   ) { }
 
 
@@ -34,7 +34,7 @@ export class User {
         case "ADMIN":
            return UserRole.ADMIN;
         default:
-           throw new CustomError(422,"Invalid user role");
+           return UserRole.NORMAL
      }
   }
 }
