@@ -5,6 +5,7 @@ import { AuthenticationData } from "../business/entities/User";
 dotenv.config();
 
 export class Authenticator {
+
   public generateToken(
      input: AuthenticationData,
      expiresIn: string | number = process.env.JWT_EXPIRES_IN!
@@ -32,6 +33,8 @@ export class Authenticator {
      return result
   }
 }
+
+export default new Authenticator()
 
 
 

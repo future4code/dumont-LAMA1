@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "createTable": "tsc && node ./build/migrations/MySqlSetup.js"
+    "createTable": "tsc && node ./build/src/migrations/MySqlSetup.js"
   },
   "keywords": [],
   "author": "Aline Vignoli, Bianca Mendes, Tainah Boarini",
