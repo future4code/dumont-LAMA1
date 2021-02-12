@@ -27,16 +27,28 @@ export class ConcertBusiness {
                 throw new CustomError(401, "Unauthorized")
             } //testar qual erro vai cair 
 
-            if(concert.startTime < 8 || concert.endTime > 23 || concert.startTime >= concert.endTime) {
+            const startTime = Number(concert.startTime)
+            const endTime = Number(concert.endTime)
+
+            if(startTime < 8 || endTime > 23 || startTime >= endTime) {
                 throw new CustomError(422, "The concerts should start at 08h and end at 23h")
             }
 
-            if(!Number.isInteger(concert.startTime) || !Number.isInteger(concert.endTime)) {
+            if(!Number.isInteger(startTime) || !Number.isInteger(endTime)) {
                 throw new CustomError(422, "Only integer numbers are valid")
             }
 
-            // const allConcerts = await this.concertDataBase.getConcertByDay(concert.weekDay)
-            // const compareTime = allConcerts && allConcerts.find((concert) => concert.startTime === startTime || concert.endTime === endTime) 
+            const allConcerts = await this.concertDataBase.getConcertByDay(concert.weekDay)
+           
+            if(!allConcerts) {
+                throw new CustomError(404, "Concert not found")
+            }
+
+            const compareTime = allConcerts && allConcerts.filter((concert) => concert.getStartTime() === startTime || concert.getEndTime() === endTime) 
+
+            if(compareTime.length) {
+                throw new CustomError(400, "This time is not available")
+            }
 
             const id = this.idGenerator.generate()
 
