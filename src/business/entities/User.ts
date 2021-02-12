@@ -1,4 +1,3 @@
-import { CustomError } from "../error/CustomError";
 
 export interface AuthenticationData {
   id: string;
@@ -10,6 +9,11 @@ export interface UserInputDTO {
   email: string;
   password: string;
   role: string;
+}
+
+export interface UserLoginInputDTO {
+  email: string;
+  password: string
 }
 
 export enum UserRole {
