@@ -7,7 +7,7 @@ export class BandDataBase extends BaseDataBase {
     private static TABLE_NAME = "lama_bands"
 
     private static toBandModel (band: any) {
-        return new Band(
+        return band && new Band(
             band.id,
             band.name,
             band.music_genre,
@@ -40,7 +40,7 @@ export class BandDataBase extends BaseDataBase {
                 .from(BandDataBase.TABLE_NAME)
                 
             const bands: Band[] = []
-            for (let band of result[0]) {
+            for (let band of result) {
                 bands.push(
                     BandDataBase.toBandModel(band)
                 )
