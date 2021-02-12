@@ -5,7 +5,10 @@ export interface concertInputDTO {
     startTime: number,
     endTime: number,
     bandId: string, 
-    //token: string
+}
+
+export interface concertOutputDTO {
+  
 }
 
 export class ConcertClass {
@@ -38,6 +41,12 @@ export class ConcertClass {
       }
 }
 
+export interface concerts {
+  concerts: ConcertClass[]
+}
+
+
+
 export enum weekDay {
     FRIDAY = "FRIDAY",
     SATURDAY = "SATURDAY",
@@ -45,7 +54,7 @@ export enum weekDay {
 }
 
 export const stringToWeekDay = (input: string): weekDay => {
-    switch (input) {
+    switch (input.toUpperCase()) {
       case "FRIDAY":
         return weekDay.FRIDAY
       case "SATURDAY":

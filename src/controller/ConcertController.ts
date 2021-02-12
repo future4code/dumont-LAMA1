@@ -26,7 +26,7 @@ export class ConcertController {
             bandId: req.body.bandId,
         }
 
-        concertBusiness.createConcert(input, token)
+        await concertBusiness.createConcert(input, token)
 
         res.status(200).send("scheduled concert")
         

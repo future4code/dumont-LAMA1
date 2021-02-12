@@ -25,15 +25,18 @@ export class ConcertBusiness {
 
             if(!verifyToken.role && verifyToken.role !== "ADMIN") { 
                 throw new CustomError(401, "Unauthorized")
-            }
+            } //testar qual erro vai cair 
 
             if(concert.startTime < 8 || concert.endTime > 23 || concert.startTime >= concert.endTime) {
                 throw new CustomError(422, "The concerts should start at 08h and end at 23h")
             }
 
             if(!Number.isInteger(concert.startTime) || !Number.isInteger(concert.endTime)) {
-                throw new CustomError(422, "Invalid time")
+                throw new CustomError(422, "Only integer numbers are valid")
             }
+
+            // const allConcerts = await this.concertDataBase.getConcertByDay(concert.weekDay)
+            // const compareTime = allConcerts && allConcerts.find((concert) => concert.startTime === startTime || concert.endTime === endTime) 
 
             const id = this.idGenerator.generate()
 
