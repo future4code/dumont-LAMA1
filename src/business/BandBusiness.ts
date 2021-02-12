@@ -28,7 +28,7 @@ export class BandBusiness {
             if (!name || !musicGenre || !responsible) {
                 throw new CustomError(
                     422, 
-                    "Please inform 'name', 'musicGenre' and 'responsible' to register a band"
+                    "Missing inputs"
                 )
             }
 
@@ -40,15 +40,16 @@ export class BandBusiness {
             }
 
             const id: string = this.idGenerator.generate()
-
-            await this.bandDatabase.createBand(
-                new Band(
-                    id,
-                    name,
-                    musicGenre,
-                    responsible
-                )
+            const band = new Band(
+                id,
+                name,
+                musicGenre,
+                responsible
             )
+
+            await this.bandDatabase.createBand(band)
+
+            return band
 
         } catch (error) {
             throw new CustomError(

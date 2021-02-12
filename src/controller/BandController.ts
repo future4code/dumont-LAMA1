@@ -22,9 +22,9 @@ export class BandController {
                 responsible: req.body.responsible
             }
 
-            bandBusiness.createBand(token, input)
+            const result = await bandBusiness.createBand(token, input)
 
-            res.status(200).send("Band created successfuly")
+            res.status(201).send({ result })
 
         } catch (error) {
             res
