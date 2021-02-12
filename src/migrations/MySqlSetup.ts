@@ -45,4 +45,4 @@ export class MySqlSetup extends BaseDataBase {
     }
  }
  
- MySqlSetup.createTables()
+MySqlSetup.createTables()
