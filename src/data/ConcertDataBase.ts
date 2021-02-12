@@ -1,10 +1,19 @@
-import { ConcertClass, concerts } from "../business/entities/Concert";
+import { ConcertClass } from "../business/entities/Concert";
 import BaseDataBase from "./BaseDataBase";
 
 export class ConcertDataBase extends BaseDataBase {
 
     protected static TABLE_NAME: string = "lama_concerts"
 
+    private static toConcertModel(concert: any) {
+        return concert && new ConcertClass(
+             concert.id,
+             concert.week_day,
+             concert.start_time,
+             concert.end_time,
+             concert.band_id
+        )
+    }
     
     public async createConcert(concert: ConcertClass): Promise<void> {
         try{
@@ -23,20 +32,20 @@ export class ConcertDataBase extends BaseDataBase {
         }
     }
 
-    public async getConcertByDay(day: string): Promise <concerts | undefined> {
+    public async getConcertByDay(day: string): Promise <ConcertClass[] | undefined> {
 
         try{
             const result = await BaseDataBase.connection
             .select("*")
             .from(ConcertDataBase.TABLE_NAME)
-            .where({day})
-            .groupBy({day})
+            .where({week_day : day})
+          
+            const allConcerts: ConcertClass[] = []
+            for (let concert of result) {
+                allConcerts.push(ConcertDataBase.toConcertModel(concert))
+            }
 
-            return result[0]
-            // const allConcerts: concerts[] = []
-            // for (let concert of result) {
-            //     allConcerts.push(ConcertDataBase.)
-            // }
+            return allConcerts
 
         } catch(error) {
             throw new Error(error.sqlMessage || error.message)

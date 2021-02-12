@@ -7,9 +7,7 @@ export interface concertInputDTO {
     bandId: string, 
 }
 
-export interface concertOutputDTO {
-  
-}
+
 
 export class ConcertClass {
     constructor(
@@ -40,11 +38,6 @@ export class ConcertClass {
         return this.bandId;
       }
 }
-
-export interface concerts {
-  concerts: ConcertClass[]
-}
-
 
 
 export enum weekDay {
