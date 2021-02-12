@@ -7,7 +7,7 @@ export class UserDatabase extends BaseDataBase {
     private static TABLE_NAME = "lama_users";
 
     private static toUserModel(user: any): User {
-        return new User(
+        return user && new User(
            user.id,
            user.name,
            user.email,
@@ -39,7 +39,7 @@ export class UserDatabase extends BaseDataBase {
         }
     }
 
-    public async getUserByEmail(email: string): Promise<User> {
+    public async getUserByEmail(email: string): Promise<User> {        
 
         try {
 

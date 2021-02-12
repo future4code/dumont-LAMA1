@@ -77,16 +77,20 @@ export class UserBusiness {
 
             const userFromDB = await this.userDataBase.getUserByEmail(input.email)
 
+            if(!userFromDB){
+                throw new CustomError(404, "User not found")
+            }
+
             const passwordIsCorrect = this.hashGenerator.compareHash(input.password, userFromDB.password)
+
+            if (!passwordIsCorrect) {
+                throw new CustomError(401, "Invalid credentials!");
+            }
 
             const accessToken = this.authenticator.generateToken({
                 id: userFromDB.id,
                 role: userFromDB.role
             });
-
-            if (!passwordIsCorrect) {
-                throw new CustomError(401, "Invalid credentials!");
-            }
 
             return accessToken;
 
