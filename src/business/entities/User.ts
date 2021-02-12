@@ -6,9 +6,9 @@ export interface AuthenticationData {
 }
 
 export interface UserInputDTO {
+  name: string;
   email: string;
   password: string;
-  name: string;
   role: string;
 }
 
