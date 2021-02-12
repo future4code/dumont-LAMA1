@@ -32,6 +32,36 @@ export class BandDataBase extends BaseDataBase {
         }
     }
 
+    public async selectBandById(
+        id: string
+    ): Promise<Band> {
+        try {
+            const result = await BaseDataBase.connection
+                .select("*")
+                .from(BandDataBase.TABLE_NAME)
+                .where({ id })
+                
+            return BandDataBase.toBandModel(result[0])
+        } catch (error) {
+            throw new CustomError(500, "An unexpected error ocurred")
+        }
+    }
+
+    public async selectBandByName(
+        name: string
+    ): Promise<Band> {
+        try {
+            const result = await BaseDataBase.connection.raw(`
+                SELECT * FROM ${BandDataBase.TABLE_NAME}
+                WHERE name LIKE "%${name}%"
+            `)
+                
+            return BandDataBase.toBandModel(result[0][0])
+        } catch (error) {
+            throw new CustomError(500, "An unexpected error ocurred")
+        }
+    }
+
     public async selectAllBands() 
     : Promise<Band[]> {
         try {

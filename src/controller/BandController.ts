@@ -32,4 +32,21 @@ export class BandController {
             .send({ error: error.message });
         }
     }
+
+    public async getBandByProperty (req: Request, res: Response) {
+        try {
+            const token: string = req.headers.authorization!
+            const id = req.query.id as string
+            const name = req.query.name as string
+            
+            const result = await bandBusiness.getBandByProperty(token, id, name)
+
+            res.status(200).send({ result })
+
+        } catch (error) {
+            res
+            .status(error.statusCode || 400)
+            .send({ error: error.message });
+        }
+    }
 }

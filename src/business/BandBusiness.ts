@@ -58,4 +58,38 @@ export class BandBusiness {
             )
         }
     }
+
+    public async getBandByProperty(
+        token: string,
+        id: string,
+        name: string
+    ): Promise<Band> {
+        try {
+            this.authenticator.getData(token);
+
+            if (!id && !name) {
+                throw new CustomError(406, "Please inform 'id' or 'name' to proceed the query")
+            }
+
+            let band: Band
+
+            if (id) {
+                band = await this.bandDatabase.selectBandById(id)
+            } else {
+                band = await this.bandDatabase.selectBandByName(name)
+            }
+            
+            if (!band) {
+                throw new CustomError(404, "Band not found")
+            }
+
+            return band
+
+        } catch (error) {
+            throw new CustomError(
+                error.statusCode || 400,
+                error.message
+            )
+        }
+    }
 }
