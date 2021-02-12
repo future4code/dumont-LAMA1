@@ -6,4 +6,4 @@ export const concertRouter = express.Router();
 const concertController = new ConcertController();
 
 concertRouter.post("/create", concertController.createConcert);
-//userRouter.post("/login", userController.login);
+concertRouter.get("/all/:day", concertController.getConcertbyDay);

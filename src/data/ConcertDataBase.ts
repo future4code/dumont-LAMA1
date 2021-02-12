@@ -7,39 +7,39 @@ export class ConcertDataBase extends BaseDataBase {
 
     private static toConcertModel(concert: any) {
         return concert && new ConcertClass(
-             concert.id,
-             concert.week_day,
-             concert.start_time,
-             concert.end_time,
-             concert.band_id
+            concert.id,
+            concert.week_day,
+            concert.start_time,
+            concert.end_time,
+            concert.band_id
         )
     }
-    
-    public async createConcert(concert: ConcertClass): Promise<void> {
-        try{
-            await BaseDataBase.connection
-            .insert({
-                id: concert.getId(),
-                week_day: concert.getWeekDay(),
-                start_time: concert.getStartTime(),
-                end_time: concert.getEndTime(),
-                band_id: concert.getBandId()
-            })
-            .into(ConcertDataBase.TABLE_NAME)
 
-        } catch(error) {
+    public async createConcert(concert: ConcertClass): Promise<void> {
+        try {
+            await BaseDataBase.connection
+                .insert({
+                    id: concert.getId(),
+                    week_day: concert.getWeekDay(),
+                    start_time: concert.getStartTime(),
+                    end_time: concert.getEndTime(),
+                    band_id: concert.getBandId()
+                })
+                .into(ConcertDataBase.TABLE_NAME)
+
+        } catch (error) {
             throw new Error(error.sqlMessage || error.message)
         }
     }
 
-    public async getConcertByDay(day: string): Promise <ConcertClass[] | undefined> {
+    public async getConcertByDay(day: string): Promise<ConcertClass[] | undefined> {
 
-        try{
+        try {
             const result = await BaseDataBase.connection
-            .select("*")
-            .from(ConcertDataBase.TABLE_NAME)
-            .where({week_day : day})
-          
+                .select("*")
+                .from(ConcertDataBase.TABLE_NAME)
+                .where({ week_day: day })
+
             const allConcerts: ConcertClass[] = []
             for (let concert of result) {
                 allConcerts.push(ConcertDataBase.toConcertModel(concert))
@@ -47,7 +47,7 @@ export class ConcertDataBase extends BaseDataBase {
 
             return allConcerts
 
-        } catch(error) {
+        } catch (error) {
             throw new Error(error.sqlMessage || error.message)
         }
     }

@@ -6,33 +6,51 @@ import { IdGenerator } from "../services/IdGenerator"
 import { Authenticator } from "../services/TokenGenerator"
 
 const concertBusiness = new ConcertBusiness(
-    new Authenticator(),
-    new ConcertDataBase(),
-    new IdGenerator()
+  new Authenticator(),
+  new ConcertDataBase(),
+  new IdGenerator()
 )
 
 export class ConcertController {
 
-    public async createConcert (req: Request, res: Response) {
+  public async createConcert(req: Request, res: Response) {
 
-      try {
+    try {
 
-        const token: string = req.headers.authorization as string
+      const token: string = req.headers.authorization as string
 
-        const input: concertInputDTO = {
-            weekDay: req.body.weekDay, 
-            startTime: req.body.startTime,
-            endTime: req.body.endTime,
-            bandId: req.body.bandId,
-        }
-
-        await concertBusiness.createConcert(input, token)
-
-        res.status(200).send("scheduled concert")
-        
-      } catch (error) {
-        res
-        .status(error.statusCode || 400).send({ error: error.message })
+      const input: concertInputDTO = {
+        weekDay: req.body.weekDay,
+        startTime: req.body.startTime,
+        endTime: req.body.endTime,
+        bandId: req.body.bandId,
       }
+
+      await concertBusiness.createConcert(input, token)
+
+      res.status(200).send("scheduled concert")
+
+    } catch (error) {
+      res
+        .status(error.statusCode || 400).send({ error: error.message })
     }
+  }
+
+  public async getConcertbyDay(req: Request, res: Response) {
+
+    try {
+
+      const { day } = req.params
+
+      const token: string = req.headers.authorization as string
+
+      const result = await concertBusiness.getAllBandsByDay(day, token)
+
+      res.status(200).send(result)
+
+    } catch (error) {
+      res
+        .status(error.statusCode || 400).send({ error: error.message })
+    }
+  }
 }

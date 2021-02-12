@@ -7,7 +7,10 @@ export interface concertInputDTO {
     bandId: string, 
 }
 
-
+export interface concertOutputDTO {
+    bandName: string,
+    musicGender: string
+}
 
 export class ConcertClass {
     constructor(
