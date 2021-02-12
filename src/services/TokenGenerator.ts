@@ -35,8 +35,3 @@ export class Authenticator {
 }
 
 export default new Authenticator()
-
-
-
-
-

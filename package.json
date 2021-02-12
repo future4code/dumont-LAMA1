@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "createTable": "tsc && node ./build/src/migrations/MySqlSetup.js"
-  },
+    "test": "clear && echo \"Running tests...\" && jest",
+    "createTable": "tsc && node ./build/src/migrations/MySqlSetup.js",
+    "dev": " ts-node-dev ./src/index.ts"
+ },
   "keywords": [],
   "author": "Aline Vignoli, Bianca Mendes, Tainah Boarini",
   "license": "ISC",

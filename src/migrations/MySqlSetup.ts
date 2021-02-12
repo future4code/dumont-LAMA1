@@ -9,7 +9,7 @@ export class MySqlSetup extends BaseDataBase {
             id VARCHAR(255) PRIMARY KEY,
             name VARCHAR(255) UNIQUE NOT NULL,
             music_genre VARCHAR(255) NOT NULL,
-            responsible VARCHAR(255) UNIQUE NOT NULL 
+            responsible VARCHAR(255) NOT NULL 
           );
           `)
     
