@@ -8,23 +8,14 @@ export class UserDatabase extends BaseDataBase {
     
 
     public async createUser(
-        id: string,
-        email: string,
-        name: string,
-        password: string,
-        role: string
+        user: User
+
     ): Promise<void> {
 
         try {
 
             await BaseDataBase.connection
-                .insert({
-                    id,
-                    email,
-                    name,
-                    password,
-                    role
-                })
+                .insert(user)
                 .into(UserDatabase.TABLE_NAME);
 
         } catch (error) {

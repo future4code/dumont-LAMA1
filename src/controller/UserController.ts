@@ -1,8 +1,17 @@
 import { Request, Response } from "express";
 import { UserInputDTO } from "../business/entities/User";
 import { UserBusiness } from "../business/UserBusiness";
+import { UserDatabase } from "../data/UserDataBase";
+import { HashGenerator } from "../services/HashManager";
+import { IdGenerator } from "../services/IdGenerator";
+import { Authenticator } from "../services/TokenGenerator";
 
-const userBusiness = new UserBusiness()
+const userBusiness = new UserBusiness(
+    new IdGenerator(),
+    new HashGenerator(),
+    new UserDatabase(),
+    new Authenticator()
+)
 
 export class UserController {
 
