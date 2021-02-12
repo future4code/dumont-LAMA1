@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "clear && echo \"Running tests...\" && jest",
-    "createTable": "tsc && node ./build/migrations/MySqlSetup.js"
+    "createTable": "tsc && node ./build/migrations/MySqlSetup.js",
+    "dev": " ts-node-dev ./src/index.ts"
   },
   "keywords": [],
   "author": "Aline Vignoli, Bianca Mendes, Tainah Boarini",
