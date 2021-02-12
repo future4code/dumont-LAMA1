@@ -32,6 +32,13 @@ export class BandBusiness {
                 )
             }
 
+            const bands = await this.bandDatabase.selectAllBands()
+            const bandAlreadyExists = bands && bands.find((band) => band.name === name)
+
+            if (bandAlreadyExists) {
+                throw new CustomError(422, "Band name already registered")
+            }
+
             const id: string = this.idGenerator.generate()
 
             await this.bandDatabase.createBand(
