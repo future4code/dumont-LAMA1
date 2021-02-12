@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "clear && echo \"Running tests...\" && jest",
     "createTable": "tsc && node ./build/migrations/MySqlSetup.js"
   },
   "keywords": [],
