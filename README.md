@@ -1,4 +1,4 @@
-# Labenu Music Awards
+# Labenu Music Awards - Projeto Backend
 
 ### Um festival com várias bandas famosas para formatura, um sistema que permite o gerenciamento completo de shows.
 
@@ -27,6 +27,6 @@ Endpoint de pegar todos os shows de uma data
 
 
 * Desenvolvido por: 
-    - Aline Vignoli
-    - Bianca Mendes
-    - Tainah Bernardo 
+    - [Aline Vignoli](https://www.linkedin.com/in/nyhvignoli/)
+    - [Bianca Mendes](https://www.linkedin.com/in/bianca-cmendes/)
+    - [Tainah Bernardo](https://www.linkedin.com/in/tainah-bernardo/)
